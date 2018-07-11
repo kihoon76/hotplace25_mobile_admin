@@ -7,30 +7,32 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
-<!-- 	<sec:http auto-config="true" use-expressions="true" > -->
-	<sec:http auto-config="true">
+	<sec:http auto-config="true" use-expressions="true" >
 		<sec:intercept-url pattern="/index.jsp" access="permitAll" />
 		<sec:intercept-url pattern="/signin" access="permitAll" />
 		<sec:intercept-url pattern="/login" access="permitAll" />
 		<sec:intercept-url pattern="/resources/**" access="permitAll" />
+		<sec:intercept-url pattern="/result/**" access="permitAll"/>
+		<sec:intercept-url pattern="/logout" access="permitAll"/>
 		<sec:intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')"/>
 		
 		<sec:form-login login-page="/signin"
 						username-parameter="id"
 						password-parameter="pw"
 						login-processing-url="/login" 
-						authentication-failure-url="/signin"
 						default-target-url="/main"
+						authentication-success-handler-ref="signinSuccessHandler"
+						authentication-failure-handler-ref="signinFailureHandler"
 						always-use-default-target="false"/>
 		
 		<!-- <sec:logout invalidate-session="true"
 					logout-success-url="/signin"
 					logout-url="/logout"/>-->
 					
-<!-- 		<sec:logout invalidate-session="true" -->
-<!-- 					logout-success-url="/result" -->
-<!-- 					logout-url="/logout" -->
-<!-- 					delete-cookies="true"/> -->
+		<sec:logout invalidate-session="true"
+					logout-success-url="/result"
+					logout-url="/logout"
+					delete-cookies="true"/>
 		<sec:csrf disabled="true"/>
 	</sec:http> 
 	

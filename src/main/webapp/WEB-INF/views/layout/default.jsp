@@ -20,6 +20,23 @@
 		<script type="text/javascript">
 			$(function() {
 				$('nav#menu').mmenu();
+				
+				$('#logout').on('click', function() {
+					$.ajax('/logout', {
+		    			dataType: 'json',
+		    			method: 'GET',
+		    			context: document.body,
+		    			success: function(data, textStatus, jqXHR) {
+		    				console.log(data)
+		    				if(data.success) {
+		    					window.location.href = '/';
+		    				}
+		    				else {
+		    					
+		    				}
+		    			}
+		        	});
+				});
 			});
 		</script>
 	</head>
@@ -48,7 +65,7 @@
 							<li><a href="#about/address">Our address</a></li>
 						</ul>
 					</li>
-					<li><a href="#contact">Contact</a></li>
+					<li><a id="logout" href="#">로그아웃</a></li>
 
 					<li class="Divider">Other demos</li>
 					<li><a href="advanced.html">Advanced demo</a></li>

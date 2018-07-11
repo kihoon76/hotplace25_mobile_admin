@@ -79,4 +79,10 @@ public class MainController {
 		
 		return "signin";
 	}
+	
+	@GetMapping("result")
+	public String result(ModelMap m) {
+		m.addAttribute("errCode", "");
+		return "result";
+	}
 }

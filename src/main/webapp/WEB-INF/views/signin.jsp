@@ -22,11 +22,35 @@
           			<input type="text"	name="id" id="id" /> 
           			<label for="pw" style="margin-top:10px;">비밀번호</label>
           			<input type="password" name="pw" id="pw" />
-          			<button data-theme="b" id="submit" type="submit" style="margin-top:15px;">로그인</button>
+          			<button data-theme="b" id="btnLogin" type="button" style="margin-top:15px;">로그인</button>
         		</div>
       		</form>
     	</div>
 	</div>
+	 <script type="text/javascript">
+    	$('#btnLogin').on('click', function() {
+    		$.ajax('/login', {
+        		contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+    			dataType: 'json',
+    			method: 'POST',
+    			context: document.body,
+    			data: {
+    				id:$('#id').val(),
+    				pw:$('#pw').val()
+    			},
+    			success: function(data, textStatus, jqXHR) {
+    				console.log(data)
+    				if(data.success) {
+    					window.location.href = 'main';
+    				}
+    				else {
+    					
+    				}
+    			}
+        	});
+    	});
+    
+    </script>
 </body>
 
 </html>
