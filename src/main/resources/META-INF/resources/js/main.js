@@ -306,30 +306,6 @@ $(function() {
 	
 	_echartPie('maechoolChart');
 	
-//	$('#datepicker').datepicker({
-//		dateFormat: 'yy-mm-dd', // 텍스트 필드에 입력되는 날짜 형식.
-//		//showOn: 'button',
-//		//buttonImage: "/resources/css/images/calendar.gif",
-//		changeMonth: true, // 월을 바꿀수 있는 셀렉트 박스를 표시한다.
-//		changeYear: true, // 년을 바꿀 수 있는 셀렉트 박스를 표시한다.
-//		showMonthAfterYear: true , // 월, 년순의 셀렉트 박스를 년,월 순으로 바꿔준다. 
-//		dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'], // 요일의 한글 형식.
-//  	  	monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'], // 월의 한글 형식.
-//  	  	onSelect: function(dateText, inst) {
-//  	  		_dateText = dateText;
-//  	  		window.location.href = '/main?date=' + _dateText + '&type=' + _type;
-//  	  	}
-//	});
-	
-//	$('#maechoolType').val(_type);
-//	$('#maechoolType').selectmenu({
-//		change: function(event, ui) {
-//			_type = ui.item.value;
-//			window.location.href = '/main?date=' + _dateText + '&type=' + _type;
-//		}
-//	});
-	//_echartLine('echart_line2');
-	
 	$('#maechoolType').on('change', function() {
 		_type = $(this).val();
 		window.location.href = '/main?date=' + _dateText + '&type=' + _type;
@@ -337,7 +313,12 @@ $(function() {
 	
 	window.selectPicker = function(obj) {
 		var d = new Date(obj.date);
-		_dateText = common.getFormatDate(d);
+		var s = common.getFormatDate(d);
+		
+		//if(s == _dataText) return;
+		
+		_dataText = s;
+		
 		window.location.href = '/main?date=' + _dateText + '&type=' + _type;
 	}
 });

@@ -1,0 +1,32 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c"	uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet"  href="/resources/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="/resources/js/jquery.min.js"></script>
+    <script src="/resources/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+
+<body>
+	<div data-role="page" id="callAjaxPage">
+    	<div data-role="header">
+      		<h1>mHotplace25 로그인</h1>
+    	</div>
+    
+    	<div data-role="content">
+      		<form method="post" action="/login">
+        		<div data-role="fieldcontain">
+          			<label for="id">아이디</label> 
+          			<input type="text"	name="id" id="id" /> 
+          			<label for="pw" style="margin-top:10px;">비밀번호</label>
+          			<input type="password" name="pw" id="pw" />
+          			<button data-theme="b" id="submit" type="submit" style="margin-top:15px;">로그인</button>
+        		</div>
+      		</form>
+    	</div>
+	</div>
+</body>
+
+</html>

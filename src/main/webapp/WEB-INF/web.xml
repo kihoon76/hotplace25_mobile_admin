@@ -13,7 +13,7 @@
 		<param-value>
 			/WEB-INF/spring/root-context.xml,
 			/WEB-INF/spring/ds-context.xml,
-<!-- 			/WEB-INF/spring/security-context.xml -->
+			/WEB-INF/spring/security-context.xml
 		</param-value>
 	</context-param>
 	
@@ -46,10 +46,10 @@
 	</filter>
 	
 	<!-- Spring Security -->
-<!-- 	<filter> -->
-<!-- 		<filter-name>springSecurityFilterChain</filter-name> -->
-<!-- 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class> -->
-<!-- 	</filter> -->
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
 	
 	<!-- Sitemesh -->
 	<!-- http://javadox.com/org.sitemesh/sitemesh/3.0.0/org/sitemesh/config/ConfigurableSiteMeshFilter.html -->
@@ -74,10 +74,10 @@
 	</filter>
 	
 	
-<!-- 	<filter-mapping> -->
-<!-- 		<filter-name>springSecurityFilterChain</filter-name> -->
-<!-- 		<url-pattern>/*</url-pattern> -->
-<!-- 	</filter-mapping>  -->
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping> 
 	
 	<filter-mapping>
 		<filter-name>sitemesh</filter-name>

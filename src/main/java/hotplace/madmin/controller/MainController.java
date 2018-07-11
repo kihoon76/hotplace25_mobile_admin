@@ -73,4 +73,10 @@ public class MainController {
 		
 		return "accessError";
 	}
+	
+	@GetMapping("signin")
+	public String signin() {
+		
+		return "signin";
+	}
 }
