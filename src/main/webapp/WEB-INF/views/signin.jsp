@@ -27,6 +27,18 @@
       		</form>
     	</div>
 	</div>
+	
+  	<div data-role="page" id="alert">
+		<div data-role="header">
+			<h1></h1>
+		</div>
+
+		<div data-role="content" data-theme="b">	
+			<p id="msg"></p>
+			<br><br>
+			<button data-rel="back">닫기</button>
+		</div>
+	</div>
 	 <script type="text/javascript">
     	$('#btnLogin').on('click', function() {
     		$.ajax('/login', {
@@ -44,7 +56,8 @@
     					window.location.href = 'main';
     				}
     				else {
-    					
+    					$('#msg').html('아이디/비번을 확인해주세요.');
+    					$.mobile.changePage( "#alert", {transition: 'pop', role: "dialog" } );
     				}
     			}
         	});
