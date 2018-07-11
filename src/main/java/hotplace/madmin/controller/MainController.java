@@ -67,4 +67,10 @@ public class MainController {
 		
 		return "main";
 	}
+	
+	@GetMapping("forbidden")
+	public String viewForbidden() {
+		
+		return "accessError";
+	}
 }

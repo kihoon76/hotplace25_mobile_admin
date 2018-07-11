@@ -5,4 +5,5 @@
     </content-processor>
 
 	<mapping path="/*" decorator="/WEB-INF/views/layout/default.jsp" />
+	<mapping path="/forbidden" exclude="true" />
 </sitemesh>
