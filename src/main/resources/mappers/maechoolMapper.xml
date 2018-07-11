@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mappers.maechoolMapper">
+	
+	<resultMap id="RM_maechool"  type="Maechool" >
+		<result column="타입" property="typeCode" javaType="string"/>
+		<result column="타입명" property="typeName" javaType="string"/>
+		<result column="금액" property="price" javaType="int"/>
+	</resultMap>
+	
+	<select id="selectMaechool" parameterType="map" resultMap="RM_maechool">
+		  select [서비스타입] + '_' + [서비스서브타입] as 타입, 
+		  		 case when 서비스서브타입 = 'YEAR' then '전체(연간)' 
+		  		 	  else '전체(월간)'
+		  		 end as 타입명,
+		  		 sum([결제금액]) as 금액
+   			from [웹].[dbo].[결제내역]
+   		   where [결제완료여부] = 'Y'
+   		     and 서비스타입 = 'ALL'
+   		   <choose>
+   		   	<when test='"MM".equals(type)'>
+   		   	and DATEDIFF(MM, #{date}, [결제확인일자]) = 0
+   		   	</when>
+   		   	<when test='"DD".equals(type)'>
+   		   	and DATEDIFF(DD, #{date}, [결제확인일자]) = 0	
+   		   	</when>
+   		   </choose>
+		   group by [서비스타입], [서비스서브타입] 
+		   union all
+		    select [서비스타입] as 타입, '개별' as 타입명, sum([결제금액]) as 금액
+   			  from [웹].[dbo].[결제내역]
+   		     where [결제완료여부] = 'Y'
+   		       and 서비스타입 = 'EACH'
+   		    <choose>
+   		   	<when test='"MM".equals(type)'>
+   		   	and DATEDIFF(MM, #{date}, [결제확인일자]) = 0
+   		   	</when>
+   		   	<when test='"DD".equals(type)'>
+   		   	and DATEDIFF(DD, #{date}, [결제확인일자]) = 0	
+   		   	</when>
+   		   </choose>
+		   group by [서비스타입] 
+	</select>
+</mapper>

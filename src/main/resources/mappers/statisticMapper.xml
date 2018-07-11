@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mappers.statisticMapper">
+	
+	<select id="selectUserKind" resultType="map">
+		select isnull(tbl1.권한번호, tbl2.권한번호) gradeNum,
+		       isnull(cnt, 0) cnt,
+			   case  권한이름 
+			   when 'ROLE_ALL' then '전체서비스 이용회원'
+			   when 'ROLE_TOOJA' then '투자유망검색 이용회원'
+			   when 'ROLE_GYEONGGONG' then '경공매검색 이용회원' 
+			   when 'ROLE_MULGEON' then '물건보기검색 이용회원'
+			   when 'ROLE_HEATMAP' then '히트맵보기 이용회원'
+			   else '단순가입회원'
+			   end  gradeName
+		 from (
+				select 권한번호, count(권한번호) cnt
+				from (
+					select isnull(권한번호, 0) 권한번호
+					  from [웹].[dbo].[계정] t1
+					  left outer join [웹].[dbo].[계정_권한] t2 on t1.아이디 = t2.계정_아이디 and t2.권한번호  not in (select 권한번호 from [웹].[dbo].[권한] where 권한이름 = 'ROLE_ADMIN' or 권한이름 = 'ROLE_QA_ADMIN' or 권한이름 = 'ROLE_JOINED')
+				) tb1
+				group by 권한번호
+		) tbl1
+		full outer join (
+			 select 권한번호, 권한이름 from [웹].[dbo].[권한] where 권한이름 not in ('ROLE_ADMIN', 'ROLE_QA_ADMIN', 'ROLE_JOINED')
+		) tbl2 on tbl2.권한번호 = tbl1.권한번호
+	</select>
+	
+	<select id="selectUserRegDate" resultType="map" parameterType="int">
+		select CONVERT(varchar(4), 가입년) regYear, CONVERT(varchar(2), 가입월) + '월' regMonth, count(*) cnt
+		  from [웹].[dbo].[계정]
+		 where 가입년 = #{regYear}
+		 group by 가입년, 가입월
+		 order by 가입년, 가입월
+	</select>
+	
+	<select id="selectAccessPerTime" statementType="CALLABLE" parameterType="map" resultMap="RM_selectAccessPerTime">
+		{call [웹].[dbo].[USP_일일시간별_접속통계](
+			#{year, mode=IN, jdbcType=SMALLINT, javaType=int},
+			#{month, mode=IN, jdbcType=SMALLINT, javaType=int},
+			#{day, mode=IN, jdbcType=SMALLINT, javaType=int}
+		)}
+	</select> 
+	
+	<select id="selectCompareContent"  statementType="CALLABLE"  parameterType="map" resultMap="RM_selectCompareContent">
+		{ call [웹].[dbo].[USP_컨텐츠별_일일접속통계](
+			#{year, mode=IN, jdbcType=SMALLINT, javaType=int},
+			#{month, mode=IN, jdbcType=SMALLINT, javaType=int}
+		)}
+	</select>
+	
+	<resultMap id="RM_selectAccessPerTime" type="map">
+		<result column="접속시"	property="hour" />
+		<result column="접속수"	property="cnt" />
+	</resultMap>
+	
+	<resultMap id="RM_selectCompareContent" type="map">
+		<result column="접속일"	property="time" />
+		<result column="물건보기"	property="mulgeon" />
+		<result column="히트맵보기"	property="heatmap" />
+		<result column="수지분석"	property="sujiboonseog" />
+	</resultMap>
+</mapper>
