@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mappers.paymentMapper">
+	
+	<resultMap id="RM_selectPayment" type="Payment">
+		<result column="일련번호"		property="key" javaType="string"/>
+		<result column="사용자계정"		property="accountId" javaType="string"/>
+		<result column="결제금액"		property="sum" javaType="int" />
+		<result column="쿠폰사용여부"	property="useCoupon" javaType="string"/>
+		<result column="쿠폰번호"		property="couponNum" javaType="string"/>
+		<result column="결제신청일자"	property="applyDate" javaType="string"/>
+		<result column="결제신청시간"	property="applyTime" javaType="string"/>
+		<result column="결제확인일자"	property="paymentConfirmDate" javaType="string"/>
+		<result column="결제일자"		property="paymentDate" javaType="string"/>
+		<result column="결제완료여부"	property="status" javaType="string"/>
+		<result column="서비스타입"		property="serviceType" javaType="string"/>
+		<result column="서비스서브타입"	property="serviceSubTypes" javaType="string"/>
+		<result column="결제내용"		property="applyComment" javaType="string" />
+		<result column="입금자명"		property="depositor" javaType="string" />
+		<result column="환불내역번호"	property="refundId" javaType="string" />
+		<result column="처리담당자계정"	property="processorId" javaType="string" />
+		<result column="처리담당자이름"	property="processorName" javaType="string" />
+	</resultMap>
+	
+	<select id="selectPayment" parameterType="map" resultMap="RM_selectPayment">
+		select 일련번호, 결제일자, 결제확인일자, 
+			   CONVERT(char(10), 결제신청일자,126) 결제신청일자,
+			   CONVERT(varchar(5), 결제신청일자, 108)결제신청시간, 결제금액, 쿠폰사용여부, tb1.쿠폰번호, 결제완료여부, 입금자명, 환불내역번호, 서비스타입, 서비스서브타입, 사용자계정, 아이디 as 처리담당자계정, 이름  as 처리담당자이름,
+			   case when 서비스타입 = 'ALL' then 
+					case when 서비스서브타입 = 'YEAR' then '전체서비스(연간결제)' 
+					 	 else '전체서비스(월간결제)'
+					end
+			        else
+					'개별서비스(' + replace(replace(replace(replace(서비스서브타입, 'ROLE_TOOJA', '투자유망검색'), 'ROLE_GYEONGGONG', '경공매검색'), 'ROLE_MULGEON', '물건보기검색'), 'ROLE_HEATMAP', '히트맵보기') + ')'
+			    end 결제내용
+		  from  [웹].[dbo].[결제내역] tb1
+		  left outer join [웹].[dbo].[발행쿠폰] tb2 on tb1.쿠폰번호 = tb2.쿠폰번호
+		  left outer join [웹].[dbo].[계정] tb3 on tb1.처리담당자 = tb3.아이디
+		 
+		 <if test="searchDate != null">
+		 	 where DATEDIFF(MM, #{searchDate}, [결제신청일자]) = 0
+		 </if>
+		 <if test="searchDate == null">
+		 	 where DATEDIFF(MM, getDate(), [결제신청일자]) = 0
+		 </if>
+		 order by [결제신청일자] desc
+	</select>
+	
+	<update id="updatePayment" statementType="CALLABLE" parameterType="map">
+	{ call  [웹].[dbo].[USP_결제확인](
+		#{key, mode=IN, jdbcType=VARCHAR, javaType=string},
+		#{paymentDate, mode=IN, jdbcType=VARCHAR, javaType=string},
+		#{accountId, mode=IN, jdbcType=VARCHAR, javaType=string}
+	)} 
+	</update>
+</mapper>

@@ -11,34 +11,16 @@
 		<link rel="stylesheet" type="text/css"  href="/resources/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css" />
 		<link rel="stylesheet" type="text/css"  href="/resources/css/mmenu.css" />
 		<link rel="stylesheet" type="text/css"  href="/resources/css/jquery.mmenu.all.css" />
+		<style>
+			.menu-nav {width:100%; height:20px; margin-top: -20px; margin-bottom: 10px; text-align: left;}
+		</style>
 		<sitemesh:write property="page.style" />
 		
 		<script type="text/javascript" src="/resources/js/jquery.min.js"></script>
 		<script type="text/javascript" src="/resources/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
 		<script type="text/javascript" src="/resources/js/jquery.mmenu.all.js"></script>
 		<script type="text/javascript" src="/resources/js/common.js"></script>
-		<script type="text/javascript">
-			$(function() {
-				$('nav#menu').mmenu();
-				
-				$('#logout').on('click', function() {
-					$.ajax('/logout', {
-		    			dataType: 'json',
-		    			method: 'GET',
-		    			context: document.body,
-		    			success: function(data, textStatus, jqXHR) {
-		    				console.log(data)
-		    				if(data.success) {
-		    					window.location.href = '/';
-		    				}
-		    				else {
-		    					
-		    				}
-		    			}
-		        	});
-				});
-			});
-		</script>
+		<script type="text/javascript" src="/resources/js/default.js"></script>
 	</head>
 	<body>
 		<div id="page">
@@ -47,29 +29,28 @@
 				Hotplace25 관리자
 			</div>
 			<div class="content">
+				<div class="menu-nav"><span id="spMenuNav"><c:out value="${menuNav}" /></span></div>
 				<sitemesh:write property="body" />
 			</div>
 			<nav id="menu">
 				<ul>
-					<li><a href="#">Home</a></li>
-					<li><span>About us</span>
-						<ul>
-							<li><a href="#about/history">History</a></li>
-							<li><span>The team</span>
-								<ul>
-									<li><a href="#about/team/management">Management</a></li>
-									<li><a href="#about/team/sales">Sales</a></li>
-									<li><a href="#about/team/development">Development</a></li>
-								</ul>
-							</li>
-							<li><a href="#about/address">Our address</a></li>
-						</ul>
-					</li>
+					<li><a id="home" href="#">Home</a></li>
+<!-- 					<li><span>About us</span> -->
+<!-- 						<ul> -->
+<!-- 							<li><a href="#about/history">History</a></li> -->
+<!-- 							<li><span>The team</span> -->
+<!-- 								<ul> -->
+<!-- 									<li><a href="#about/team/management">Management</a></li> -->
+<!-- 									<li><a href="#about/team/sales">Sales</a></li> -->
+<!-- 									<li><a href="#about/team/development">Development</a></li> -->
+<!-- 								</ul> -->
+<!-- 							</li> -->
+<!-- 							<li><a href="#about/address">Our address</a></li> -->
+<!-- 						</ul> -->
+<!-- 					</li> -->
 					<li><a id="logout" href="#">로그아웃</a></li>
-
-					<li class="Divider">Other demos</li>
-					<li><a href="advanced.html">Advanced demo</a></li>
-					<li><a href="onepage.html">One page demo</a></li>
+					<li><a id="payment" href="#">결제관리</a></li>
+					<li><a id="qna" href="#">Q&A 관리</a></li>
 				</ul>
 			</nav>
 		</div>

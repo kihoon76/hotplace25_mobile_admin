@@ -56,6 +56,7 @@ public class MainController {
 		m.addAttribute("type", type);
 		m.addAttribute("total", total);
 		m.addAttribute("date", date);
+		m.addAttribute("menuNav", "[매출정보]");
 		
 		if(result != null) {
 			Gson json = new Gson();
