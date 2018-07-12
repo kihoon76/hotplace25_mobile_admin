@@ -6,6 +6,7 @@
 		<result column="타입" property="typeCode" javaType="string"/>
 		<result column="타입명" property="typeName" javaType="string"/>
 		<result column="금액" property="price" javaType="int"/>
+		<result column="건수" property="count" javaType="int"/>
 	</resultMap>
 	
 	<select id="selectMaechool" parameterType="map" resultMap="RM_maechool">
@@ -13,7 +14,8 @@
 		  		 case when 서비스서브타입 = 'YEAR' then '전체(연간)' 
 		  		 	  else '전체(월간)'
 		  		 end as 타입명,
-		  		 sum([결제금액]) as 금액
+		  		 sum([결제금액]) as 금액,
+		  		 count(*) as 건수
    			from [웹].[dbo].[결제내역]
    		   where [결제완료여부] = 'Y'
    		     and 서비스타입 = 'ALL'
@@ -27,7 +29,7 @@
    		   </choose>
 		   group by [서비스타입], [서비스서브타입] 
 		   union all
-		    select [서비스타입] as 타입, '개별' as 타입명, sum([결제금액]) as 금액
+		    select [서비스타입] as 타입, '개별' as 타입명, sum([결제금액]) as 금액, count(*) as 건수
    			  from [웹].[dbo].[결제내역]
    		     where [결제완료여부] = 'Y'
    		       and 서비스타입 = 'EACH'

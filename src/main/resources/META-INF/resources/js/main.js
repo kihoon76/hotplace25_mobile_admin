@@ -229,7 +229,8 @@ $(function() {
 				        trigger: 'item',
 				        formatter: function(params, ticket, callback) {
 				        	var data = params.data;
-				        	var v = data.name + '<br/>' + data.value.toString().money() + '원';
+				        	console.log(params)
+				        	var v = data.name + '<br/>결제건수: ' + data.count + '<br/>' + data.value.toString().money() + '원';
 				        	return v;
 				        } //"{a} <br/>{b} : {c} ({d}%)"
 				    },
@@ -295,7 +296,8 @@ $(function() {
 			for(var i=0; i<len; i++) {
 				arr.push({
 					value: list[i].price,
-					name: list[i].typeName
+					name: list[i].typeName,
+					count: list[i].count
 				})
 			}
 		}
@@ -313,11 +315,11 @@ $(function() {
 	
 	window.selectPicker = function(obj) {
 		var d = new Date(obj.date);
-		var s = common.getFormatDate(d);
+		_dateText = common.getFormatDate(d);
 		
-		//if(s == _dataText) return;
+		//if(s == _dateText) return;
 		
-		_dataText = s;
+		//_dataText = s;
 		
 		window.location.href = '/main?date=' + _dateText + '&type=' + _type;
 	}
