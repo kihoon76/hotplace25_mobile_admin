@@ -5,10 +5,19 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet"  href="/resources/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css" />
+    <style>
+		.ui-dialog-contain {
+		    width: 92.5%;
+		    max-width: 500px;
+		    margin: 50% auto 1em;
+		    padding: 0;
+		    position: relative;
+		    top: -1em;
+		}
+	</style>
     <script src="/resources/js/jquery.min.js"></script>
     <script src="/resources/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
 </head>
-
 <body>
 	<div data-role="page" id="callAjaxPage">
     	<div data-role="header">
@@ -36,11 +45,16 @@
 		<div data-role="content" data-theme="b">	
 			<p id="msg"></p>
 			<br><br>
-			<button data-rel="back">닫기</button>
+			<button data-rel="back" id="btnClose">닫기</button>
 		</div>
 	</div>
 	 <script type="text/javascript">
-    	$('#btnLogin').on('click', function() {
+	 	function _run() {
+	 		var id = $.trim($('#id').val());
+    		var pw = $.trim($('#pw').val());
+    		
+    		if(!id || !pw) return;
+    		
     		$.ajax('/login', {
         		contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
     			dataType: 'json',
@@ -61,8 +75,21 @@
     				}
     			}
         	});
+	 	}
+	 	
+		$('#pw').on('keypress', function(e) {
+			if(e.keyCode == 13) {
+				_run();		
+			}
+		});
+		
+    	$('#btnLogin').on('click', function() {
+    		_run();
     	});
     
+    	$('#btnClose').on('click', function() {
+    		$('#alert').dialog('close');
+    	});
     </script>
 </body>
 
