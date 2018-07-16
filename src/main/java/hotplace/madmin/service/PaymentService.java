@@ -2,6 +2,7 @@ package hotplace.madmin.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,17 +19,17 @@ public class PaymentService {
 	@Resource(name="paymentDao")
 	PaymentDao paymentDao;
 	
-	public Map<String, HashMap<String, Object>> getPaymentList(Map map) {
+	public LinkedHashMap<String, HashMap<String, Object>> getPaymentList(Map map) {
 		List<Payment> list = paymentDao.selectPaymentList(map);
 		
-		Map<String, HashMap<String, Object>> result = null;
+		LinkedHashMap<String, HashMap<String, Object>> result = null;
 		int c = 0;
 		String curYYMMDD = null;
 		int curYYMMDDcnt = 0;
 		Payment p = null;
 		
 		if(list != null && (c = list.size()) > 0) {
-			result = new HashMap<>();
+			result = new LinkedHashMap<>();
 			
 			for(int i = 0; i < c; i++) {
 				p = list.get(i);

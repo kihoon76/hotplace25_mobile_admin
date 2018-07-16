@@ -1,6 +1,7 @@
 package hotplace.madmin.controller;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -21,7 +22,7 @@ public class PaymentController {
 	
 	@GetMapping("list")
 	public String getPaymentList(ModelMap m) {
-		Map<String, HashMap<String, Object>> result = null;
+		LinkedHashMap<String, HashMap<String, Object>> result = null;
 		
 		try {
 			Map map = new HashMap<>();
