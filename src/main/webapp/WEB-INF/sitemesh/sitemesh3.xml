@@ -6,6 +6,7 @@
 
 	<mapping path="/forbidden" exclude="true" />
 	<mapping path="/signin" exclude="true" />
+	<mapping path="/resources/templates/*" exclude="true" />
 	<mapping path="/*" decorator="/WEB-INF/views/layout/default.jsp" />
 	
 </sitemesh>

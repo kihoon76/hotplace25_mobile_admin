@@ -19,22 +19,23 @@
 		<script type="text/javascript" src="/resources/js/jquery.min.js"></script>
 		<script type="text/javascript" src="/resources/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
 		<script type="text/javascript" src="/resources/js/jquery.mmenu.all.js"></script>
-		<script type="text/javascript" src="/resources/js/common.js"></script>
-		<script type="text/javascript" src="/resources/js/default.js"></script>
 	</head>
 	<body>
-		<div id="page">
+		<div id="page" data-role="page">
 			<div class="header">
 				<a href="#menu"><span></span></a>
 				Hotplace25 관리자
 			</div>
-			<div class="content">
-				<div class="menu-nav"><span id="spMenuNav"><c:out value="${menuNav}" /></span></div>
-				<sitemesh:write property="body" />
+			<div id="dvContent"  class="content">
+				<div id="content1">
+					<div class="menu-nav"><span id="spMenuNav"><c:out value="${menuNav}" /></span></div>
+					<sitemesh:write property="body" />
+				</div>
 			</div>
-			<nav id="menu">
-				<ul>
-					<li><a id="home" href="#">Home</a></li>
+		</div>
+		<nav id="menu">
+			<ul>
+				<li><a href="/" rel="external">Home</a></li>
 <!-- 					<li><span>About us</span> -->
 <!-- 						<ul> -->
 <!-- 							<li><a href="#about/history">History</a></li> -->
@@ -48,12 +49,14 @@
 <!-- 							<li><a href="#about/address">Our address</a></li> -->
 <!-- 						</ul> -->
 <!-- 					</li> -->
-					<li><a id="logout" href="#">로그아웃</a></li>
-					<li><a id="payment" href="#">결제관리</a></li>
-					<li><a id="qna" href="#">Q&A 관리</a></li>
-				</ul>
-			</nav>
-		</div>
+				<li><a id="logout" href="#">로그아웃</a></li>
+				<li><a href="/payment/list" rel="external">결제관리</a></li>
+				<li><a href="/qna/list" rel="external">Q&A 관리</a></li>
+			</ul>
+		</nav>
+		
+		<script type="text/javascript" src="/resources/js/common.js"></script>
+		<script type="text/javascript" src="/resources/js/default.js"></script>
 		<sitemesh:write property="page.script" />
 	</body> 
 </html>

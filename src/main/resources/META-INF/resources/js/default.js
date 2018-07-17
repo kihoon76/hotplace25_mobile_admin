@@ -1,5 +1,7 @@
 $(function() {
-	$('nav#menu').mmenu();
+//	$('nav#menu').mmenu();
+//	
+//	var API = $('nav#menu').data('mmenu');
 	
 	$('#logout').on('click', function() {
 		$.ajax('/logout', {
@@ -18,15 +20,51 @@ $(function() {
     	});
 	});
 	
-	$('#payment').on('click', function() {
-		window.location.href = '/payment/list';
+	$('#menu').mmenu({
+		onClick		: {
+			blockUI			: false,
+			preventDefault	: function() {
+				return this.rel != 'external';
+			}
+		}
+	}, {
+		pageSelector: 'div[data-role="page"]:first'
 	});
 	
-	$('#home').on('click', function() {
-		window.location.href = '/';
-	});
 	
-	$('#qna').on('click', function() {
-		window.location.href = '/qna/list';
-	});
+	$('#menu a[rel!="external"]').on(
+		'click',
+		function()
+		{
+			var _t = this;
+			$('#menu').one(
+				'closed.mm',
+				function()
+				{
+					$.mobile.changePage( _t.href, {
+						transition: 'slide'
+					});
+				}
+			);
+		}
+	);
+	
+//	$(document).on(
+//		'pageshow',
+//		function( e, ui )
+//		{
+//			$('#menu').trigger( 'setPage', [ $(e.target) ] );
+//			$('#menu a').each(
+//				function()
+//				{
+//					if ( $.mobile.path.parseUrl( this.href ).href == window.location.href )
+//					{
+//						$(this).trigger( 'setSelected.mm' );
+//					}
+//				}
+//			);
+//		}
+//	);
+	
+	
 });

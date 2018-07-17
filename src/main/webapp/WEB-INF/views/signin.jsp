@@ -19,7 +19,7 @@
     <script src="/resources/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
 </head>
 <body>
-	<div data-role="page" id="callAjaxPage">
+	<div data-role="page">
     	<div data-role="header">
       		<h1>mHotplace25 로그인</h1>
     	</div>

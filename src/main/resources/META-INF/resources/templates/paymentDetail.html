@@ -1,0 +1,46 @@
+<input id="btnBack" type="button" value="돌아가기" class="zbtn zbtn-primary zbtn-full zbtn-lg" style="margin-bottom: 10px;"> 
+<form class="zform zform-radius" id="paymentDetail">
+	<fieldset class="zform-fieldset">
+    	<div class="zform-control">
+        	<div class="control-field">
+        		<label for="">아이디:</label>
+            	<input id="id" type="text" class="field-text" data-required="true" data-descriptions="username" data-describedby="id-description" readonly>
+            </div>
+            <div id="id-description"></div>     
+        </div>
+        <div class="zform-control">
+        	<div class="control-field">
+        		<label for="">입금자명:</label>
+            	<input type="text" id="depositor" class="field-text" data-required="true" data-descriptions="password" data-describedby="depositor-description"  readonly>
+            </div> 
+            <div id="depositor-description"></div>    
+        </div>
+        <div class="zform-control">
+        	<div class="control-field">
+        		<label for="">결제금액:</label>
+            	<input type="text" id="price" class="field-text"  data-required="true" data-descriptions="price" data-describedby="price-description" readonly>
+            </div>
+            <div id="price-description"></div>
+        </div>
+        <div class="zform-control">
+        	<div class="control-field">
+        		<label for="">쿠폰할인:</label>
+            	<input id="coupon" type="text" class="field-text"  data-required="true" data-descriptions="coupon" data-describedby="coupon-description" readonly>
+            </div>
+            <div id="coupon-description"></div>
+        </div>
+         <div class="zform-control">
+        	<div class="control-field">
+        		<label for="paydate">결제일자:</label>
+            	<input id="paydate" type="text" class="field-text"  
+            		   data-required="true" 
+            		   data-descriptions="paydate" 
+            		   data-describedby="paydate-description" 
+            		   placeholder="예) 2018-01-01" 
+            		   data-pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+            </div>
+            <div id="paydate-description"></div>
+        </div>
+	</fieldset>
+    <input id="confirmPayment" type="submit" value="결제확인" class="zbtn zbtn-primary zbtn-full zbtn-lg">   
+</form>
