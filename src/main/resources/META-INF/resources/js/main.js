@@ -323,4 +323,5 @@ $(function() {
 		
 		window.location.href = '/main?date=' + _dateText + '&type=' + _type;
 	}
+
 });

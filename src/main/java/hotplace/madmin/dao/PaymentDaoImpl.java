@@ -23,4 +23,9 @@ public class PaymentDaoImpl implements PaymentDao {
 		return msSqlSession.selectList(namespace + ".selectPayment", map);
 	}
 
+	@Override
+	public void updatePayment(Map<String, String> param) {
+		msSqlSession.update(namespace + ".updatePayment", param);
+	}
+
 }

@@ -64,4 +64,8 @@ public class PaymentService {
 		
 		return result;
 	}
+
+	public void confirmPayment(Map<String, String> param) {
+		paymentDao.updatePayment(param);
+	}
 }

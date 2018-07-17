@@ -1,5 +1,7 @@
 $(function() {
 	var _html = '';
+	var _key = '';
+	
 	$(document).on('click', '#btnBack', function() {
 		$('#dvContent').html('<div id="content1">' + _html + '</div>');
 	});
@@ -9,6 +11,7 @@ $(function() {
 	.on('click', '.PAYMENT', function() {
 		var $this = $(this);
 		_html = $('#content1').html();
+		_key = $this.data('key');
 		
 		common.getHtml({
 			name: 'paymentDetail',
@@ -23,6 +26,7 @@ $(function() {
 				var couponValue = $this.data('couponValue');
 				var couponUnit = $this.data('couponUnit');
 				var status = $this.data('status');
+				var paymentDate = $this.data('paymentDate');
 				
 				if(couponUnit) {
 					couponUnit = (couponUnit == 1) ? '%' : '원';
@@ -41,6 +45,8 @@ $(function() {
 					}
 					
 					$('#confirmPayment').prop('disabled', true);
+					$('#paydate').prop('readonly', true).val(paymentDate);
+					
 				}
 				else {
 					if($("#confirmPayment").hasClass('zbtn-default')) {
@@ -48,6 +54,7 @@ $(function() {
 					}
 					
 					$('#confirmPayment').prop('disabled', false);
+					$('#paydate').prop('readonly', false);
 					_validate();
 				}
 			}
@@ -61,7 +68,7 @@ $(function() {
             sendForm:true,
             firstInvalidFocus:false,
             valid:function(event,options){
-            	//$('#paymentDetail').submit();
+            	event.preventDefault();
             	_submit();
             },
             invalid:function(event, status, options){
@@ -82,19 +89,34 @@ $(function() {
 	}
 	
 	function _submit() {
-		$.ajax('/logout', {
+		$.ajax('/payment/confirm', {
 			dataType: 'json',
-			method: 'GET',
+			contentType: 'application/json; charset=UTF-8',
+			data: JSON.stringify({
+				key: _key,
+				paymentDate: $.trim($('#paydate').val())
+			}),
+			method: 'POST',
 			context: document.body,
 			success: function(data, textStatus, jqXHR) {
 				console.log(data)
 				if(data.success) {
-					window.location.href = '/';
+					window.location.href = '/payment/list';
 				}
 				else {
-					
+					alert(data.errMsg);
 				}
 			}
     	});
 	}
+	
+	$('#dvContent').css('height', document.documentElement.clientHeight - 100 + 'px');
+	
+	$('#btnSearchPayment').on('click', function() {
+		var y = $('#searchYear').val();
+		var m = $('#searchMonth').val();
+		
+		console.log(y + '/' + m);
+		window.location.href = '/payment/list?searchYear=' + y + '&searchMonth=' + m;
+	});
 });

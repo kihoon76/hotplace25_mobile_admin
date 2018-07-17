@@ -3,28 +3,28 @@
 	<fieldset class="zform-fieldset">
     	<div class="zform-control">
         	<div class="control-field">
-        		<label for="">아이디:</label>
+        		<label for="id">아이디:</label>
             	<input id="id" type="text" class="field-text" data-required="true" data-descriptions="username" data-describedby="id-description" readonly>
             </div>
             <div id="id-description"></div>     
         </div>
         <div class="zform-control">
         	<div class="control-field">
-        		<label for="">입금자명:</label>
+        		<label for="depositor">입금자명:</label>
             	<input type="text" id="depositor" class="field-text" data-required="true" data-descriptions="password" data-describedby="depositor-description"  readonly>
             </div> 
             <div id="depositor-description"></div>    
         </div>
         <div class="zform-control">
         	<div class="control-field">
-        		<label for="">결제금액:</label>
+        		<label for="price">결제금액:</label>
             	<input type="text" id="price" class="field-text"  data-required="true" data-descriptions="price" data-describedby="price-description" readonly>
             </div>
             <div id="price-description"></div>
         </div>
         <div class="zform-control">
         	<div class="control-field">
-        		<label for="">쿠폰할인:</label>
+        		<label for="coupon">쿠폰할인:</label>
             	<input id="coupon" type="text" class="field-text"  data-required="true" data-descriptions="coupon" data-describedby="coupon-description" readonly>
             </div>
             <div id="coupon-description"></div>
@@ -37,7 +37,8 @@
             		   data-descriptions="paydate" 
             		   data-describedby="paydate-description" 
             		   placeholder="예) 2018-01-01" 
-            		   data-pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+            		   data-pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
+            		   maxlength="10">
             </div>
             <div id="paydate-description"></div>
         </div>

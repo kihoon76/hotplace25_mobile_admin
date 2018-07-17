@@ -49,6 +49,8 @@ $(function() {
 		}
 	);
 	
+	//$('#dvContent').css('height', document.documentElement.clientHeight + 'px')
+	
 //	$(document).on(
 //		'pageshow',
 //		function( e, ui )
