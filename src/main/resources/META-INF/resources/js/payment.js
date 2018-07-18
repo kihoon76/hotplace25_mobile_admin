@@ -1,23 +1,26 @@
 $(function() {
-	var _html = '';
 	var _key = '';
+	var _link = '';
 	
 	$(document).on('click', '#btnBack', function() {
-		$('#dvContent').html('<div id="content1">' + _html + '</div>');
+		$('#content2').remove();
+		$('#content1').show(300, function() {
+			document.location.href = '#' + _link;
+		});
 	});
 	
 	$(document)
 	.off('click', '.PAYMENT')
 	.on('click', '.PAYMENT', function() {
 		var $this = $(this);
-		_html = $('#content1').html();
 		_key = $this.data('key');
+		_link = $this.prop('name');
 		
 		common.getHtml({
 			name: 'paymentDetail',
 			success: function(data, textStatus, jqXHR) {
-				$('#content1').hide();
-				$('#dvContent').html(data);
+				$('#content1').hide(300);
+				$('#dvContent').append(data);
 				$('#id').val($this.data('accountId'));
 				$('#depositor').val($this.data('depositor'));
 				$('#price').val($this.data('price').toString().money() + '원 (' + $this.data('comment') + ')');
@@ -110,13 +113,12 @@ $(function() {
     	});
 	}
 	
-	$('#dvContent').css('height', document.documentElement.clientHeight - 100 + 'px');
+	//$('#dvContent').css('height', document.documentElement.clientHeight - 100 + 'px');
 	
 	$('#btnSearchPayment').on('click', function() {
 		var y = $('#searchYear').val();
 		var m = $('#searchMonth').val();
 		
-		console.log(y + '/' + m);
 		window.location.href = '/payment/list?searchYear=' + y + '&searchMonth=' + m;
 	});
 });

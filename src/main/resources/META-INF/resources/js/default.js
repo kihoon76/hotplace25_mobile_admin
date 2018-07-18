@@ -49,7 +49,7 @@ $(function() {
 		}
 	);
 	
-	//$('#dvContent').css('height', document.documentElement.clientHeight + 'px')
+	$('#dvContent').css('height', document.documentElement.clientHeight  - 100 + 'px')
 	
 //	$(document).on(
 //		'pageshow',

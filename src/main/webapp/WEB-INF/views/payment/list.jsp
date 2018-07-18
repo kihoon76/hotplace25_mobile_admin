@@ -43,7 +43,8 @@
 				<li data-role="list-divider">${entry.key}<span class="ui-li-count">${entry.value['count']}</span></li>
 				<c:forEach var="payment" items="${entry.value['list']}">
 				<li>
-	    			<a  data-account-id="${payment.accountId}" 
+	    			<a  name="${payment.accountId}"
+	    				data-account-id="${payment.accountId}" 
 	    				data-depositor="${payment.depositor}"
 	    				data-key="${payment.key}"
 	    				data-price="${payment.sum}"
