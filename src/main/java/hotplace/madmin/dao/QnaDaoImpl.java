@@ -1,6 +1,7 @@
 package hotplace.madmin.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -18,8 +19,13 @@ public class QnaDaoImpl implements QnaDao {
 	SqlSession msSqlSession;
 
 	@Override
-	public List<QnA> selectQnaList() {
-		return msSqlSession.selectList(namespace + ".selectQnaList");
+	public List<QnA> selectQnaList(String searchDate) {
+		return msSqlSession.selectList(namespace + ".selectQnaList", searchDate);
+	}
+
+	@Override
+	public void updateProcess(Map<String, String> param) {
+		msSqlSession.update(namespace + ".updateProcess", param);
 	}
 
 }

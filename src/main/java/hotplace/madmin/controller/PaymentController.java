@@ -62,7 +62,7 @@ public class PaymentController {
 		m.addAttribute("month", month);
 		m.addAttribute("startYear", curYear - 10);
 		m.addAttribute("endYear", curYear);
-		return "payment/list";
+		return "payment";
 	}
 	
 	@PostMapping("confirm")

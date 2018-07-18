@@ -1,0 +1,35 @@
+<div id="content2">
+<input id="btnBack" type="button" value="돌아가기" class="zbtn zbtn-primary zbtn-full zbtn-lg" style="margin-bottom: 10px;"> 
+<form class="zform zform-radius" id="qnaDetail">
+	<fieldset class="zform-fieldset">
+		<div class="zform-control">
+        	<div class="control-field">
+        		<label for="phone">연락처: <a id="phone" class="qna-phone"></a></label>
+            </div>
+        </div>
+        
+		<div class="zform-control">
+        	<div class="control-field">
+        		<label for="reqTime">상담요청일자:</label>
+            	<input id="reqTime" type="text" class="field-text" data-required="true" data-descriptions="reqTime" data-describedby="reqTime-description" readonly>
+            </div>
+            <div id="reqTime-description"></div>     
+        </div>
+        <div class="zform-control">
+        	<div class="control-field">
+        		<label for="question">문의사항:</label>
+            	<textarea id="question" class="field-text" data-required="true" data-descriptions="question" data-describedby="question-description"  readonly style="height:100px;"></textarea>
+            </div> 
+            <div id="question-description"></div>    
+        </div>
+      	<div class="zform-control">
+        	<div class="control-field">
+        		<label for="processContent">처리내용:</label>
+            	<textarea id="processContent" class="field-text" data-required="true" data-descriptions="processContent" data-describedby="processContent-description" style="height:100px;"></textarea>
+            </div> 
+            <div id="processContent-description"></div>    
+        </div>
+	</fieldset>
+    <input id="processQuestion" type="submit" value="상담처리" class="zbtn zbtn-primary zbtn-full zbtn-lg">   
+</form>
+</div>

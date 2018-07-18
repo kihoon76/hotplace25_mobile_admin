@@ -57,11 +57,11 @@ nav:not(.mm-menu)
 .header,
 .footer
 {
-	background: #777;
+	background: #000;
 	font-size: 16px;
 	font-weight: bold;
 	color: #fff;
-	line-height: 40px;
+	line-height: 45px;
 
 
 	-moz-box-sizing: border-box;

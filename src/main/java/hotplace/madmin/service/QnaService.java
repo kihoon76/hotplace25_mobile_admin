@@ -1,6 +1,7 @@
 package hotplace.madmin.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -15,8 +16,12 @@ public class QnaService {
 	@Resource(name="qnaDao")
 	QnaDao qnaDao;
 	
-	public List<QnA> getQnaList() {
-		return qnaDao.selectQnaList();
+	public List<QnA> getQnaList(String searchDate) {
+		return qnaDao.selectQnaList(searchDate);
+	}
+	
+	public void resolveProcess(Map<String, String> param) {
+		 qnaDao.updateProcess(param);
 	}
 
 }

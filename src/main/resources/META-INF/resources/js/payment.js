@@ -104,11 +104,16 @@ $(function() {
 			success: function(data, textStatus, jqXHR) {
 				console.log(data)
 				if(data.success) {
-					window.location.href = '/payment/list';
+					var y = $('#searchYear').val();
+					var m = $('#searchMonth').val();
+					window.location.href = '/payment/list?searchYear=' + y + '&searchMonth=' + m;
 				}
 				else {
 					alert(data.errMsg);
 				}
+			},
+			error: function() {
+				alert('시스템 오류입니다.')
 			}
     	});
 	}
