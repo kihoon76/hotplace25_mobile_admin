@@ -5,7 +5,7 @@ $(function() {
 	$(document).on('click', '#btnBack', function() {
 		$('#content2').remove();
 		$('#content1').show(300, function() {
-			document.location.href = '#' + _link;
+			//document.location.href = '#' + _link;
 		});
 	});
 	
