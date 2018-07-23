@@ -46,6 +46,10 @@ public class DeviceInterceptor extends HandlerInterceptorAdapter {
 			return true;
 		}
 		else {
+			if(request.getRequestURL().toString().indexOf("/resources") > -1) {
+				return true;
+			}
+			
 			response.sendRedirect(baseUrl + "/forbidden");
 			return false;
 		}
