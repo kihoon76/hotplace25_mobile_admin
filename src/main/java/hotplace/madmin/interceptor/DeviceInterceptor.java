@@ -38,7 +38,7 @@ public class DeviceInterceptor extends HandlerInterceptorAdapter {
 		String userAgent = request.getHeader("User-Agent");
 		String baseUrl = RequestUtil.getBaseUrl(request);
 		
-		if(request.getRequestURL().toString().indexOf("/forbidden") > 0) {
+		if(request.getRequestURL().toString().indexOf("/forbidden") > -1) {
 			return true;
 		}
 		
