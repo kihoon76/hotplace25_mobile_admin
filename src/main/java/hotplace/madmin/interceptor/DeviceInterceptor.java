@@ -38,7 +38,7 @@ public class DeviceInterceptor extends HandlerInterceptorAdapter {
 		String userAgent = request.getHeader("User-Agent");
 		String baseUrl = RequestUtil.getBaseUrl(request);
 		
-		/*if(request.getRequestURL().toString().indexOf("/forbidden") > 0) {
+		if(request.getRequestURL().toString().indexOf("/forbidden") > 0) {
 			return true;
 		}
 		
@@ -48,7 +48,7 @@ public class DeviceInterceptor extends HandlerInterceptorAdapter {
 		else {
 			response.sendRedirect(baseUrl + "/forbidden");
 			return false;
-		}*/
-		return true;
+		}
+		//return true;
 	}
 }
