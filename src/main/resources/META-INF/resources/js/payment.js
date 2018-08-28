@@ -23,6 +23,7 @@ $(function() {
 				$('#dvContent').append(data);
 				$('#id').val($this.data('accountId'));
 				$('#depositor').val($this.data('depositor'));
+				$('#method').val($this.data('method'));
 				$('#price').val($this.data('price').toString().money() + '원 (' + $this.data('comment') + ')');
 				
 				var couponYN = $this.data('couponYn');
