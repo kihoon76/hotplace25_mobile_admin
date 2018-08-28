@@ -24,6 +24,7 @@ public class Payment {
 	private String refundId;					//환불내역번호
 	private String processorId;					//결제처리담당자계정
 	private String processorName;				//결제처리담당자이름
+	private String method;						//결제방법
 	
 	public String getAccountId() {
 		return accountId;
@@ -138,5 +139,11 @@ public class Payment {
 	}
 	public void setApplyTime(String applyTime) {
 		this.applyTime = applyTime;
+	}
+	public String getMethod() {
+		return method;
+	}
+	public void setMethod(String method) {
+		this.method = method;
 	}
 }

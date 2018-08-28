@@ -56,6 +56,7 @@
 	    				data-processor-name="${payment.processorName}"
 	    				data-status="${payment.status}"
 	    				data-payment-date="${payment.paymentDate}"
+	    				data-method="${payment.method}"
 	    				class="PAYMENT" href="#" <c:if test="${payment.status eq 'N'}"> style="background-color:#ff0000;"</c:if>>
 		    			<h2><span class="text-ellip">${payment.accountId} (${payment.depositor})</span></h2>
 		    			<p>${payment.applyComment}</p>
