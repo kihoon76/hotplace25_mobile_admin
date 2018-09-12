@@ -19,6 +19,10 @@
 			<mvc:mapping path="/**"/>
 			<beans:bean class="hotplace.madmin.interceptor.DeviceInterceptor" />
 		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<beans:bean class="hotplace.madmin.interceptor.SSLInterceptor" />
+		</mvc:interceptor>
         <beans:bean  id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
             <beans:property name="paramName" value="lang" />
         </beans:bean>
